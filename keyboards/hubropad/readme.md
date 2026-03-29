@@ -66,3 +66,23 @@ If the keyboard fails to enumerate on some hosts/hubs, increase the delay in `co
 ### Clock Configuration
 
 The board uses a 12 MHz HSE crystal. The PLL is configured as 12 MHz × 6 = 72 MHz (system clock), with USB at 72 / 1.5 = 48 MHz. The relevant overrides are in `mcuconf.h` and `board.h`.
+
+## How to build?
+
+### 1. Install dependencies
+sudo apt install git python3-pip gcc-arm-none-eabi binutils-arm-none-eabi make
+
+### 2. Clone with submodules (or init them in your existing checkout)
+git submodule update --init --recursive
+
+### 3. Install QMK CLI
+pip3 install --user qmk
+
+### 4. Set up QMK environment (first time only)
+qmk setup --home /home/llatva/git/qmk_firmware_hubropad
+
+### 5. Build
+make hubropad:default
+
+### 6. Flash (put board in bootloader mode first, then)
+make hubropad:default:flash
